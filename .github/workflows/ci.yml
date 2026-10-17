@@ -1,0 +1,33 @@
+name: Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  fedora:
+    runs-on: ubuntu-24.04
+    container: registry.fedoraproject.org/fedora:44
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install ClamAV and tools
+        run: dnf install -y clamav inotify-tools libnotify make findutils which
+      - name: Syntax check
+        run: bash -n bin/steel-shield && bash -n tests/selftest.sh
+      - name: Detection and quarantine test
+        run: make test
+      - name: Install to a staging folder
+        run: make install DESTDIR="$PWD/stage" && find stage -type f | sort
+
+  debian:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install ClamAV and tools
+        run: sudo apt-get update && sudo apt-get install -y clamav inotify-tools libnotify-bin
+      - name: Detection and quarantine test
+        run: make test
