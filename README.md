@@ -84,6 +84,14 @@ was quarantined.
 | `share/icons/` | the Steel Shield icon |
 | `tests/selftest.sh` | detection and quarantine test |
 
+## Who maintains it
+
+Steel Shield belongs to the steel-and-code organization and is maintained
+jointly by Steel & Code and Blackbox Entertainment, with tests that run every
+week even when nothing changes. See [MAINTAINERS.md](MAINTAINERS.md) for the
+rules that keep it from going unmaintained, and
+[CONTRIBUTING.md](CONTRIBUTING.md) to help.
+
 ## Licence
 
 Apache License 2.0. See [LICENSE](LICENSE) and [NOTICE](NOTICE).
